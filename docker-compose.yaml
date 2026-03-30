@@ -56,10 +56,10 @@ services:
     image: satishlakamsani/mysql:1.0.0
     container_name: mysql
     healthcheck:
-    test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pRoboShop@1"]
-    interval: 10s
-    timeout: 5s
-    retries: 5
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pRoboShop@1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
 networks:
   default: 
