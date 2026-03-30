@@ -1,0 +1,43 @@
+services:
+  catalogue:
+    build: ./catalogue
+    image: satishlakamsani/catalogue:1.0.0
+    container_name: catalogue
+    depends_on:
+    - mongodb 
+  
+  user:
+    build: ./user
+    image: satishlakamsani/user:1.0.0
+    container_name: user
+    depends_on:
+    - redis
+    - mongodb
+  cart:
+    build: ./cart
+    image: satishlakamsani/cart:1.0.0
+    container_name: cart
+    depends_on:
+    - redis
+    - catalogue
+
+  frontend:
+    build: ./frontend
+    image: satishlakamsani/frontend:1.0.0
+    container_name: frontend
+    ports:
+    - "80:80"
+    depends_on:
+    - catalogue
+    - user
+    - cart
+
+  mongodb:
+    build: ./mongodb  #it moves to mongodb directory
+    image: satishlakamsani/mongodb:1.0.0 #docker build -t satishlakamsani/mongodb:1.0.0
+    container_name: mongodb 
+  redis:
+    image: redis:7.0
+    container_name: redis
+
+  
