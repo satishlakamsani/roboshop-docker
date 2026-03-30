@@ -38,6 +38,7 @@ services:
     - catalogue
     - user
     - cart
+    - shipping
 
   mongodb:
     build: ./mongodb  #it moves to mongodb directory
