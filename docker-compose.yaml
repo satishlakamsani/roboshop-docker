@@ -25,9 +25,12 @@ services:
     image: satishlakamsani/shipping:1.0.0
     container_name: shipping
     depends_on:
-    - mysql
-    - cart
-
+      mysql:
+       condition: service_healthy
+      cart:
+       condition: service_healthy
+    
+ 
   frontend:
     build: ./frontend
     image: satishlakamsani/frontend:1.0.0
@@ -52,6 +55,11 @@ services:
     build: ./mysql
     image: satishlakamsani/mysql:1.0.0
     container_name: mysql
+    healthcheck:
+    test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-pRoboShop@1"]
+    interval: 10s
+    timeout: 5s
+    retries: 5
 
 networks:
   default: 
